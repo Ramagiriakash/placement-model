@@ -1,10 +1,13 @@
-from flask import Flask, request
+from flask import Flask, render_template, request
 import pickle
 
 app = Flask(__name__)
 
-# load your already created model
 model = pickle.load(open("model.pkl", "rb"))
+
+@app.route('/')
+def home():
+    return render_template('index.html')
 
 @app.route('/predict', methods=['POST'])
 def predict():
@@ -13,6 +16,10 @@ def predict():
 
     result = model.predict([[iq, cgpa]])
 
-    return "PLACED" if result[0] == 1 else "NOT PLACED"
+    return render_template(
+        'index.html',
+        prediction="PLACED" if result[0] == 1 else "NOT PLACED"
+    )
 
-app.run()
+if __name__ == "__main__":
+    app.run(debug=True)
