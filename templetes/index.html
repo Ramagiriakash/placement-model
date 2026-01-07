@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Placement Prediction</title>
+    <style>
+        body {
+            font-family: Arial;
+            background: #eef2f3;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .box {
+            background: white;
+            padding: 25px;
+            width: 320px;
+            border-radius: 10px;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+            text-align: center;
+        }
+
+        input {
+            width: 90%;
+            padding: 10px;
+            margin: 10px 0;
+        }
+
+        button {
+            width: 100%;
+            padding: 10px;
+            background: #007bff;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+        }
+
+        h3 {
+            margin-top: 15px;
+            color: green;
+        }
+
+        .not {
+            color: red;
+        }
+    </style>
+</head>
+<body>
+
+<div class="box">
+    <h2>Placement Predictor</h2>
+
+    <form action="/predict" method="POST">
+        <input type="number" name="iq" placeholder="Enter IQ" required>
+        <input type="number" step="0.01" name="cgpa" placeholder="Enter CGPA" required>
+        <button type="submit">Predict</button>
+    </form>
+
+    {% if prediction %}
+        <h3 class="{{ 'not' if prediction == 'NOT PLACED' else '' }}">
+            {{ prediction }}
+        </h3>
+    {% endif %}
+</div>
+
+</body>
+</html>
