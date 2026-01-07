@@ -54,10 +54,11 @@
     <h2>Placement Predictor</h2>
 
     <form action="/predict" method="POST">
-        <input type="number" name="iq" placeholder="Enter IQ" required>
-        <input type="number" step="0.01" name="cgpa" placeholder="Enter CGPA" required>
-        <button type="submit">Predict</button>
-    </form>
+    <input type="number" name="iq" required>
+    <input type="number" step="0.01" name="cgpa" required>
+    <button type="submit">Predict</button>
+</form>
+
 
     {% if prediction %}
         <h3 class="{{ 'not' if prediction == 'NOT PLACED' else '' }}">
